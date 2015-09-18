@@ -51,7 +51,13 @@ median_steps
 
 ## What is the average daily activity pattern?
 
+```r
+steps_at_diff_interval <- aggregate(activity_df$steps,
+                                    list(activity_df$interval), FUN = mean, na.rm= TRUE)
+plot(steps_at_diff_interval$Group.1,steps_at_diff_interval$x)
+```
 
+![](PA1_template_files/figure-html/unnamed-chunk-1-1.png) 
 
 ## Imputing missing values
 
