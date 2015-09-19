@@ -23,7 +23,7 @@ no_of_steps_per_day
 
 steps_var <- setNames(aggregate(activity_df$steps,list(activity_df$date), FUN = sum, na.rm= TRUE)
                       ,c("Date","Sum"))
-steps_var
+
 hist(steps_var$Sum,breaks=61)
 
 mean_steps <- mean(steps_var$Sum)
@@ -42,7 +42,7 @@ steps_at_diff_interval <- setNames(aggregate(activity_df$steps,
                                     list(activity_df$interval), FUN = mean, na.rm= TRUE),
                                    c("Interval","mean"))
 
-plot(steps_at_diff_interval$Interval,steps_at_diff_interval$mean)
+plot(steps_at_diff_interval$Interval,steps_at_diff_interval$mean,type="l",xlab="Interval",ylab="Number of steps")
 max_steps <- max(steps_at_diff_interval$mean)
 max_steps
 max_steps_interval <- subset(steps_at_diff_interval,mean == max_steps)[1,1]
@@ -64,7 +64,7 @@ activity_df_mod$steps[is.na(activity_df_mod$steps)] <- with(activity_df_mod, ave
 
 steps_var_mod <- setNames(aggregate(activity_df_mod$steps,list(activity_df_mod$date), 
                                     FUN = sum, na.rm= TRUE),c("Date","Sum"))
-steps_var_mod
+
 hist(steps_var_mod$Sum,breaks=61)
 
 mean_steps_mod <- mean(steps_var_mod$Sum)
@@ -90,7 +90,7 @@ activity_df$weekday <- replace(activity_df$weekday,activity_df$weekday=="Friday"
 activity_df$weekday <- replace(activity_df$weekday,activity_df$weekday=="Saturday","weekend")
 activity_df$weekday <- replace(activity_df$weekday,activity_df$weekday=="Sunday","weekend")
 activity_df$weekday <- factor(activity_df$weekday)
-summary(activity_df)
+
 steps_at_diff_interval_mod <- setNames(aggregate(activity_df$steps,
                                     list(activity_df$interval,activity_df$weekday), 
                                     FUN = mean, na.rm= TRUE),
